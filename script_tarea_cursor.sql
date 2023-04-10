@@ -64,6 +64,7 @@ insert into inventario(id_producto, cantidad) values (4, 7);
 
 -- Procedimiento Almacenado - Cursor
 delimiter $
+-- lista_por_categoria() recibe un id de categoría de producto y retorna una lista de todos los productos en un solo elemento varchar separados por comas
 CREATE PROCEDURE lista_por_categoria (IN categoria_id int, OUT lista_productos VARCHAR(1000))
 BEGIN
 	DECLARE terminar INT DEFAULT 0;
@@ -84,13 +85,15 @@ BEGIN
         SET lista_productos = CONCAT(producto, ", ", lista_productos);        
 	END LOOP obtProducto;
     
-    set lista_productos = trim(", " from lista_productos);
+    set lista_productos = TRIM(", " from lista_productos);
+    set lista_productos = CONCAT(lista_productos, ".");
     
     CLOSE curProductos;
 END
 $
 DELIMITER ;
 
+-- Ejemplo de Uso
 SET @lista = "";
 CALL lista_por_categoria(1, @lista);
 SELECT @lista;
