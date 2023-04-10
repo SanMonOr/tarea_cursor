@@ -1,6 +1,6 @@
-drop database if exists supermercado_triggers;
-create database supermercado_triggers;
-use supermercado_triggers;
+drop database if exists supermercado;
+create database supermercado;
+use supermercado;
 
 create table if not exists tipo_productos(
 	id int primary key auto_increment,
@@ -35,11 +35,6 @@ insert into productos(id_tipo_producto, nombre, valor_venta) values (1, 'costill
 insert into productos(id_tipo_producto, nombre, valor_venta) values (2, 'banano criollo (1lb)', 1900);
 insert into productos(id_tipo_producto, nombre, valor_venta) values (2, 'fresa (1lb)', 12500);
 
-insert into inventario(id_producto, cantidad) values (1, 2);
-insert into inventario(id_producto, cantidad) values (2, 3);
-insert into inventario(id_producto, cantidad) values (3, 14);
-insert into inventario(id_producto, cantidad) values (4, 7);
-
 -- Trigger
 delimiter !
 create trigger insercion_valor_total_productos before insert 
@@ -65,7 +60,6 @@ insert into inventario(id_producto, cantidad) values (1, 2);
 insert into inventario(id_producto, cantidad) values (2, 3);
 insert into inventario(id_producto, cantidad) values (3, 14);
 insert into inventario(id_producto, cantidad) values (4, 7);
-
 -- drop trigger insercion_valor_total_productos;
 
 -- Procedimiento Almacenado - Cursor
